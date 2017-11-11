@@ -82,17 +82,17 @@ dependencies {
     testCompile group: 'junit', name: 'junit', version: '4.11'
 }
 
-configurations.each { conf ->
-    conf.resolutionStrategy.eachDependency { DependencyResolveDetails details ->
-        if (details.requested.group == 'javax.validation' && details.requested.name == 'validation-api') {
-            if (conf.name == 'runtime' && project.gradle.startParameter.taskNames[0] != 'vaadinCompile') {
-                details.useVersion '1.1.0.Final'
-            } else {
-                details.useVersion '1.0.0.GA'
-            }
-        }
-    }
-}
+//configurations.each { conf ->
+//    conf.resolutionStrategy.eachDependency { DependencyResolveDetails details ->
+//        if (details.requested.group == 'javax.validation' && details.requested.name == 'validation-api') {
+//            if (conf.name == 'runtime' && project.gradle.startParameter.taskNames[0] != 'vaadinCompile') {
+//                details.useVersion '1.1.0.Final'
+//            } else {
+//                details.useVersion '1.0.0.GA'
+//            }
+//        }
+//    }
+//}
 
 
 task wrapper(type: Wrapper) {

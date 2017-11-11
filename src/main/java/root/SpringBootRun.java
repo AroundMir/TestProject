@@ -1,33 +1,25 @@
+package root;
+
 import conf.ControllerConfig;
 import conf.DataConfig;
 import conf.ServiceConfig;
-import entity.Book;
-import entity.Order;
-import entity.Person;
-import input.Console;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.support.SpringBootServletInitializer;
 import org.springframework.context.annotation.Import;
-import service.BookService;
-import service.OrderService;
-import service.PersonService;
-
-import java.util.ArrayList;
-import java.util.List;
 
 @SpringBootApplication
 @Import({ControllerConfig.class, DataConfig.class, ServiceConfig.class})
-public class Main extends SpringBootServletInitializer {
+public class SpringBootRun extends SpringBootServletInitializer {
 
     public static void main(final String[] args) {
-        SpringApplication.run(Main.class, args);
+        SpringApplication.run(SpringBootRun.class, args);
     }
 
     @Override
     protected SpringApplicationBuilder configure(final SpringApplicationBuilder builder) {
-        return builder.sources(Main.class);
+        return builder.sources(SpringBootRun.class);
     }
 
 
