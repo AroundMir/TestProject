@@ -1,21 +1,36 @@
 package entity;
 
 
+import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.List;
 
+@Entity
 public class Order {
 
-    private Person person;
-    private Book book;
-    private LocalDate date;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
 
-    public Order(Person person, Book book){
-        this.person = person;
-        this.book = book;
+    @OneToOne(cascade = {CascadeType.REFRESH, CascadeType.MERGE})
+    @JoinColumn(name = "person_id")
+    private Person person;
+
+    @OneToMany(fetch = FetchType.LAZY, cascade = {CascadeType.REFRESH, CascadeType.MERGE})
+    @JoinColumn(name = "book_id")
+    private List<Book> books;
+
+    public Order(){
+
     }
 
-    public Book getBook() {
-        return this.book;
+    public Order(Person person, List<Book> books){
+        this.person = person;
+        this.books = books;
+    }
+
+    public List<Book> getBook() {
+        return this.books;
     }
 
     public Person getPerson() {
@@ -23,8 +38,8 @@ public class Order {
         return this.person;
     }
 
-    public void setBook(Book book) {
-        this.book = book;
+    public void setBook(List<Book> books) {
+        this.books = books;
     }
 
     public void setPerson(Person person) {

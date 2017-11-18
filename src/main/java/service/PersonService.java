@@ -2,10 +2,12 @@ package service;
 
 import entity.Person;
 import input.Console;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Service
 public class PersonService {
 
     public List<Person> createPerson(List<Person> persons) {

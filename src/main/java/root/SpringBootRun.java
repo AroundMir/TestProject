@@ -22,7 +22,6 @@ public class SpringBootRun extends SpringBootServletInitializer {
         return builder.sources(SpringBootRun.class);
     }
 
-
 //    public static void main(String[] args) {
 //
 //        List<Book> books = new ArrayList<>();

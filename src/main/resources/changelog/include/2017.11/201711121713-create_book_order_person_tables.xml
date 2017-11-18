@@ -1,0 +1,42 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                   http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+
+    <changeSet id="201711121713-create_book_order_person_tables" author="Miroslav">
+        <comment>
+            создание таблицы для сущности "Автомобиль"
+        </comment>
+
+        <createTable tableName="book" remarks="Таблица Книги">
+            <column autoIncrement="true" name="id" type="bigint">
+                <constraints primaryKey="true" primaryKeyName="pk_book_id"/>
+            </column>
+            <column name="name" type="VARCHAR(255)" remarks="Название книги"/>
+            <column name="author" type="VARCHAR(255)" remarks="Автор книги"/>
+            <column name="count" type="INT" remarks="Количество книг"/>
+        </createTable>
+
+        <createTable tableName="person" remarks="Таблица Владельцев">
+            <column autoIncrement="true" name="id" type="bigint">
+                <constraints primaryKey="true" primaryKeyName="pk_person_id"/>
+            </column>
+            <column name="name" type="VARCHAR(255)" remarks="Имя"/>
+            <column name="surname" type="VARCHAR(255)" remarks="Фамилия"/>
+        </createTable>
+
+        <createTable tableName="order" remarks="Таблица Заказы">
+            <column autoIncrement="true" name="id" type="bigint">
+                <constraints primaryKey="true" primaryKeyName="pk_order_id"/>
+            </column>
+            <column name="person_id" type="bigint">
+                <constraints nullable="false" foreignKeyName="fk_order_person_id" references="person(id)"/>
+            </column>
+            <column name="book_id" type="bigint">
+                <constraints nullable="false" foreignKeyName="fk_order_book_id" references="book(id)"/>
+            </column>
+        </createTable>
+
+    </changeSet>
+
+</databaseChangeLog>

@@ -1,15 +1,25 @@
 package entity;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+@Entity
 public class Person {
 
     private String name;
-    private String Surname;
-    private  int id;
+    private String surname;
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
+
 
 
     public Person(String name, String surname, int id) {
         this.name = name;
-        this.Surname = surname;
+        this.surname = surname;
         this.id = id;
     }
 
@@ -18,7 +28,7 @@ public class Person {
     }
 
     public String getSurname() {
-        return Surname;
+        return surname;
     }
 
     public int getId() {
@@ -30,7 +40,7 @@ public class Person {
     }
 
     public void setSurname(String surname) {
-        this.Surname = surname;
+        this.surname = surname;
     }
 
     public void setId(int id) {

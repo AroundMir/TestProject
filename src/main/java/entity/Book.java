@@ -1,18 +1,32 @@
 package entity;
 
+import javax.persistence.*;
+
+@Entity
 public class Book {
 
-
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
     private String name;
     private String author;
-    private int id;
+
+    @Column(name = "count")
     private int count;
+
+    public Book() {
+
+    }
 
     public Book(String name, String author, int id, int count) {
         this.name = name;
         this.author = author;
         this.id = id;
-        this.count = id;
+        this.count = count;
+    }
+
+    public Book getBook(){
+        return this;
     }
 
     public void setName(String name) {

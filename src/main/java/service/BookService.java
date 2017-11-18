@@ -1,23 +1,32 @@
 package service;
 
+import DAO.BookDAO;
 import entity.Book;
 import entity.Person;
 import input.Console;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import javax.transaction.Transactional;
 import java.util.List;
 import java.util.stream.Collectors;
 
+
+@Service
 public class BookService {
 
-    public  List<Book> createBook(List<Book> books) {
-        System.out.println("Enter name of book");
-        String name = Console.read();
-        System.out.println("Enter author of book");
-        String author = Console.read();
-        System.out.println("Enter count of book");
-        String count = Console.read();
+    @Autowired
+    private BookDAO bookDAO;
 
-        books.add(new Book(name, author, books.size()+1, Integer.parseInt(count)));
-        return books;
+    public void testService(){
+
+        List<Book> list = bookDAO.test2();
+        String a = "";
+    }
+
+    @Transactional
+    public  Book createBook(Book book) {
+        return bookDAO.save(book);
     }
 
     public void deleteBook(List<Book> books) {
