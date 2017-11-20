@@ -1,9 +1,10 @@
 package entity;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
-public class Book {
+public class Book implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -15,7 +16,6 @@ public class Book {
     private int count;
 
     public Book() {
-
     }
 
     public Book(String name, String author, int id, int count) {
