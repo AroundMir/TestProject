@@ -18,12 +18,15 @@ public class Order implements Serializable {
     @JoinColumn(name = "person_id")
     private Person person;
 
-    @OneToMany(fetch = FetchType.LAZY, cascade = {CascadeType.REFRESH, CascadeType.MERGE})
-    @JoinColumn(referencedColumnName = "id", name = "book_id")
+    @ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.ALL})
+    @JoinTable(name = "order_book",
+            joinColumns = {
+                    @JoinColumn(name = "order_id", nullable = false)},
+            inverseJoinColumns = {
+                    @JoinColumn(name = "book_id", nullable = false)})
     private List<Book> books;
 
     public Order(){
-
     }
 
     public Order(Person person, List<Book> books){
@@ -47,25 +50,12 @@ public class Order implements Serializable {
         this.books = books;
     }
 
-    public List<Book> getBook() {
-        return this.books;
-    }
-
     public Person getPerson() {
 
         return this.person;
     }
 
-    public void setBook(List<Book> books) {
-        this.books = books;
-    }
-
     public void setPerson(Person person) {
         this.person = person;
-    }
-
-    @Override
-    public String toString() {
-        return getBook().toString() + " " + getPerson().toString();
     }
 }

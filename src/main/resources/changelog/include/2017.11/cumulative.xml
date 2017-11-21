@@ -4,6 +4,7 @@
                    http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
 
     <include relativeToChangelogFile="true" file="201711121713-create_book_order_person_tables.xml"/>
+    <include relativeToChangelogFile="true" file="201711231713-create_order_book_table.xml"/>
 
 </databaseChangeLog>
 

@@ -15,7 +15,8 @@ public class Person {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-
+    public Person() {
+    }
 
     public Person(String name, String surname, int id) {
         this.name = name;

@@ -32,9 +32,6 @@
             <column name="person_id" type="bigint">
                 <constraints nullable="false" foreignKeyName="fk_order_person_id" references="person(id)"/>
             </column>
-            <column name="book_id" type="bigint">
-                <constraints nullable="false" foreignKeyName="fk_order_book_id" references="book(id)"/>
-            </column>
         </createTable>
 
     </changeSet>

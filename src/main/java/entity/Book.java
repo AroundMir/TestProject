@@ -25,10 +25,6 @@ public class Book implements Serializable {
         this.count = count;
     }
 
-    public Book getBook(){
-        return this;
-    }
-
     public void setName(String name) {
         this.name = name;
     }
