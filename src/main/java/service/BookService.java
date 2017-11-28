@@ -17,31 +17,19 @@ public class BookService {
     @Autowired
     private BookDAO bookDAO;
 
-    public void testService(){
-        List<Book> list = bookDAO.test2();
-        String a = "";
-    }
-
     @Transactional
-    public  Book createBook(Book book) {
+    public Book save(Book book) {
         return bookDAO.save(book);
     }
 
     //удаление по ИД
-    public boolean deleteBook(Integer id) {
-        if(checkBookId(id)){
-            bookDAO.delete(id);
-            return true;
-        }
-        return false;
+    @Transactional
+    public void delete(Integer id) {
+        bookDAO.delete(id);
     }
 
-    public Book findBook(List<Book> books, Integer id){
-        if(checkBookId(id)){
-            Book book = books.stream().filter(s -> s.getId() == id).collect(Collectors.toList()).get(id);
-            return book;
-        }
-        return null;
+    public Book findById(Integer id){
+        return bookDAO.findOne(id);
     }
 
     public List<Book> showAll() {
@@ -49,10 +37,6 @@ public class BookService {
         }
 
     public boolean checkBookId(Integer id) {
-
-        if(bookDAO.findOne(id).equals(Optional.empty()))
-            return false;
-        else return true;
-
+        return bookDAO.exists(id);
     }
 }

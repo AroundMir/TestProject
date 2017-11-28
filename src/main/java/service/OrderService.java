@@ -8,6 +8,7 @@ import entity.Person;
 import input.Console;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,25 +21,16 @@ public class OrderService {
     @Autowired
     private OrderDAO orderDAO;
 
-    public Order orderTest(){
-        Order order = orderDAO.findOne(1);
-        String a = "1";
-        return order;
-    }
-
     // Вопрос как лучше создать коллекция Книга и количество. Потом
     // сравняв это с тем что есть
 
-    public boolean deleteOrder(Integer orderId){
-        if(checkOrderId(orderId)){
-            orderDAO.delete(orderId);
-            return true;
-        }
-        return false;
+    @Transactional
+    public void delete(Integer id){
+        orderDAO.delete(id);
     }
 
-
-    public Order createOrder(List<Book> books, Person person) {
+    @Transactional
+    public Order save(List<Book> books, Person person) {
 
         Order order = new Order(person, books);
         return orderDAO.save(order);
