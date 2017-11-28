@@ -1,5 +1,6 @@
 package service;
 
+import DAO.BookDAO;
 import DAO.OrderDAO;
 import entity.Book;
 import entity.Order;
@@ -19,65 +20,50 @@ public class OrderService {
     @Autowired
     private OrderDAO orderDAO;
 
-    public void orderTest(){
-
+    public Order orderTest(){
         Order order = orderDAO.findOne(1);
         String a = "1";
+        return order;
     }
 
-    public void buyBook(List<Book> books, List<Person> persons, List<Order> orders,
-                 PersonService personService, BookService bookService) {
+    // Вопрос как лучше создать коллекция Книга и количество. Потом
+    // сравняв это с тем что есть
 
-        System.out.println("Enter id Person who buy the book");
-        Integer personId = Integer.parseInt(Console.read());
-
-        System.out.println("Enter id of book to buy");
-        Integer bookId = Integer.parseInt(Console.read());
-
-        System.out.println("Enter count of books to buy");
-        Integer bookOrderCount = Integer.parseInt(Console.read());
-
-
-
-
-        if (personService.checkPersonId(personId, persons) & bookService.checkId(bookId, books) &
-                bookOrderCount <= books.get(bookId).getCount()) {
-
-            //Создаем коллекцию, но пока что с книгами одного id. В интерфейсе
-            //потом будет возможность сделать заказ с несколькими.
-            List<Book> booksOrder = new ArrayList<>();
-            int i = 0;
-            while (i <= bookOrderCount) {
-                Book orderedBook = books.get(bookId);
-                booksOrder.add(orderedBook);
-                i++;
-            }
-
-
-            Integer bookCount = books.get(bookId).getCount() - bookOrderCount;
-            Book book = books.get(bookId);
-            book.setCount(bookCount);
-
-            orders.add(new Order(persons.get(personId), booksOrder));
+    public boolean deleteOrder(Integer orderId){
+        if(checkOrderId(orderId)){
+            orderDAO.delete(orderId);
+            return true;
         }
-
-
-
-        System.out.println("The book was bought");
+        return false;
     }
 
-    public void showPersonOrders(List<Book> books, List<Person> persons, List<Order> orders,
-                                 PersonService personService){
 
-        System.out.println("Enter Person id");
-        Integer personId = Integer.parseInt(Console.read());
+    public Order createOrder(List<Book> books, Person person) {
 
-        if (personService.checkPersonId(personId, persons)) {
-            orders.stream().filter(s -> s.getPerson().getId() == personId).collect(Collectors.toList()).forEach(s -> System.out.println(s));
+        Order order = new Order(person, books);
+        return orderDAO.save(order);
+
+    }
+
+    public List<Order> PersonOrders(List<Person> persons,
+                                        PersonService personService, Integer personId){
+
+        List<Order> allOrders = orderDAO.findAll();
+
+        if (personService.checkPersonId(personId)) {
+            return allOrders.stream().filter(s -> s.getPerson().getId() == personId).collect(Collectors.toList());
         }
+        return null;
     }
 
-     public void showAllOrders(List<Order> orders){
-        orders.stream().forEach(s -> System.out.println(orders));
+     public List<Order> AllOrders(){
+
+        List<Order> orders = orderDAO.findAll();
+        return orders;
+    }
+
+    public boolean checkOrderId(Integer id) {
+        List<Order> orders = orderDAO.findAll();
+        return orders.stream().filter(s -> s.getId() == id).collect(Collectors.toList()).size() > 0;
     }
 }

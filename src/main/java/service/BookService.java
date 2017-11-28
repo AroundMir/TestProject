@@ -2,13 +2,12 @@ package service;
 
 import DAO.BookDAO;
 import entity.Book;
-import entity.Person;
-import input.Console;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 
@@ -19,7 +18,6 @@ public class BookService {
     private BookDAO bookDAO;
 
     public void testService(){
-
         List<Book> list = bookDAO.test2();
         String a = "";
     }
@@ -29,31 +27,32 @@ public class BookService {
         return bookDAO.save(book);
     }
 
-    public void deleteBook(List<Book> books) {
-        System.out.println("Enter id of book");
-        Integer id = Integer.parseInt(Console.read());
-        if(checkId(id, books)){
-            books = books.stream().filter(s -> s.getId() != id).collect(Collectors.toList());
-            System.out.println("Book was delete in base");
-        } else {
-            System.out.println("Id not found");
+    //удаление по ИД
+    public boolean deleteBook(Integer id) {
+        if(checkBookId(id)){
+            bookDAO.delete(id);
+            return true;
         }
+        return false;
     }
 
-    public void findBook(List<Book> books){
-        System.out.println("Enter id of book");
-        Integer id = Integer.parseInt(Console.read());
-        if(checkId(id, books)){
+    public Book findBook(List<Book> books, Integer id){
+        if(checkBookId(id)){
             Book book = books.stream().filter(s -> s.getId() == id).collect(Collectors.toList()).get(id);
-            System.out.println(book);
+            return book;
         }
+        return null;
     }
 
-    public void showAll(List<Book> books) {
-        books.stream().forEach(b -> System.out.println(b));
+    public List<Book> showAll() {
+        return bookDAO.findAll();
         }
 
-    public boolean checkId(int id, List<Book> books) {
-        return books.stream().filter(s -> s.getId() == id).collect(Collectors.toList()).size() > 0;
+    public boolean checkBookId(Integer id) {
+
+        if(bookDAO.findOne(id).equals(Optional.empty()))
+            return false;
+        else return true;
+
     }
 }
