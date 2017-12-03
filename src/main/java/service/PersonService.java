@@ -6,6 +6,7 @@ import input.Console;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -21,34 +22,26 @@ public class PersonService {
         return persons;
     }
 
-    public Person createPerson(String name, String surname, Integer id) {
-        return personDAO.save(new Person(name, surname, id));
+    @Transactional
+    public Person save(Person person) {
+        return personDAO.save(person);
     }
 
-    public boolean deletePerson(Integer id) {
-        if (checkPersonId(id)) {
+    @Transactional
+    public void delete(Integer id) {
             personDAO.delete(id);
-            return true;
-        }
-        return false;
     }
 
-   public Person findPerson(Integer id)  {
-        if  (checkPersonId(id)){
-            Person person = personDAO.findAll().stream().filter(s -> s.getId() == id).collect(Collectors.toList()).get(id);
-            return person;
-        }
-     return null;
+    public Person find(Integer id)  {
+        return personDAO.findOne(id);
     }
 
-    public List<Person> showAllPersons(){
-        List<Person> persons = personDAO.findAll();
-        return persons;
+    public List<Person> showAll(){
+        return personDAO.findAll();
     }
 
     public boolean checkPersonId(Integer id) {
-        List<Person> persons = personDAO.findAll();
-        return persons.stream().filter(s -> s.getId() == id).collect(Collectors.toList()).size() > 0;
+        return personDAO.exists(id);
     }
 
 }

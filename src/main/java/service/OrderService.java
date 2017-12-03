@@ -2,10 +2,12 @@ package service;
 
 import DAO.BookDAO;
 import DAO.OrderDAO;
+import dto.OrderDTO;
 import entity.Book;
 import entity.Order;
 import entity.Person;
 import input.Console;
+import org.aspectj.weaver.ast.Or;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -21,8 +23,6 @@ public class OrderService {
     @Autowired
     private OrderDAO orderDAO;
 
-    // Вопрос как лучше создать коллекция Книга и количество. Потом
-    // сравняв это с тем что есть
 
     @Transactional
     public void delete(Integer id){
@@ -30,32 +30,20 @@ public class OrderService {
     }
 
     @Transactional
-    public Order save(List<Book> books, Person person) {
-
-        Order order = new Order(person, books);
+    public Order save(OrderDTO order) {
         return orderDAO.save(order);
-
     }
 
-    public List<Order> PersonOrders(List<Person> persons,
-                                        PersonService personService, Integer personId){
-
+    public List<Order> findPersonOrders(Integer personId){
         List<Order> allOrders = orderDAO.findAll();
-
-        if (personService.checkPersonId(personId)) {
             return allOrders.stream().filter(s -> s.getPerson().getId() == personId).collect(Collectors.toList());
-        }
-        return null;
     }
 
-     public List<Order> AllOrders(){
-
-        List<Order> orders = orderDAO.findAll();
-        return orders;
+     public List<Order> showAll(){
+         return orderDAO.findAll();
     }
 
-    public boolean checkOrderId(Integer id) {
-        List<Order> orders = orderDAO.findAll();
-        return orders.stream().filter(s -> s.getId() == id).collect(Collectors.toList()).size() > 0;
+     public boolean checkOrderId(Integer id) {
+        return orderDAO.exists(id);
     }
 }
