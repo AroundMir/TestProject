@@ -1,7 +1,6 @@
 package controller;
 
 
-import com.sun.org.apache.regexp.internal.RE;
 import dto.BookDTO;
 import dto.PersonDTO;
 import entity.Book;
@@ -41,7 +40,7 @@ public class PersonController {
         return personService.find(id);
     }
 
-    @RequestMapping(path = "/{personId}", method = RequestMethod.GET)
+    @RequestMapping(path = "/{personId}", method = RequestMethod.DELETE)
     public ResponseEntity deleteById(@PathVariable(name = "personId", required = true) Integer id){
         try{
             personService.delete(id);

@@ -1,6 +1,7 @@
 package dto;
 
 import entity.Book;
+import entity.Order;
 import entity.Person;
 import service.OrderService;
 
@@ -8,22 +9,15 @@ import java.util.List;
 
 public class OrderDTO {
 
-    public class Order {
-
         private Person person;
 
         private List<Book> books;
 
-        public Order(){
+        public OrderDTO(){
         }
 
-        public Order(Person person, List<Book> books){
-            this.person = person;
-            this.books = books;
-        }
 
         public List<Book> getBooks() {
-
             return books;
         }
 
@@ -49,4 +43,4 @@ public class OrderDTO {
             return order;
         }
     }
-}
+

@@ -30,7 +30,7 @@ public class OrderService {
     }
 
     @Transactional
-    public Order save(OrderDTO order) {
+    public Order save(Order order) {
         return orderDAO.save(order);
     }
 
