@@ -17,7 +17,5 @@
             </column>
         </createTable>
 
-
     </changeSet>
-
 </databaseChangeLog>

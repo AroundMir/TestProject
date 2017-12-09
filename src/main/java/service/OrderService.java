@@ -1,20 +1,13 @@
 package service;
 
-import DAO.BookDAO;
 import DAO.OrderDAO;
-import dto.OrderDTO;
-import entity.Book;
 import entity.Order;
-import entity.Person;
-import input.Console;
-import org.aspectj.weaver.ast.Or;
+import io.swagger.models.auth.In;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 @Service
@@ -38,6 +31,10 @@ public class OrderService {
         List<Order> allOrders = orderDAO.findAll();
             return allOrders.stream().filter(s -> s.getPerson().getId() == personId).collect(Collectors.toList());
     }
+
+     public Order getById(Integer id){
+        return orderDAO.findOne(id);
+     }
 
      public List<Order> showAll(){
          return orderDAO.findAll();

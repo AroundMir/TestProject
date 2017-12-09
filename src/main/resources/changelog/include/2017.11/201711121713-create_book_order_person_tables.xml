@@ -5,7 +5,7 @@
 
     <changeSet id="201711121713-create_book_order_person_tables" author="Miroslav">
         <comment>
-            создание таблицы для сущности "Автомобиль"
+            создание таблицы для сущности "Книга"
         </comment>
 
         <createTable tableName="book" remarks="Таблица Книги">

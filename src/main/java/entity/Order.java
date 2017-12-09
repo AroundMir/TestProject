@@ -28,11 +28,6 @@ public class Order implements Serializable {
     public Order(){
     }
 
-    public Order(Person person, List<Book> books){
-        this.person = person;
-        this.books = books;
-    }
-
     public int getId() {
         return id;
     }
