@@ -17,7 +17,7 @@ public class Order implements Serializable {
     @JoinColumn(name = "person_id")
     private Person person;
 
-    @ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.ALL})
+    @ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.ALL}, targetEntity = Book.class)
     @JoinTable(name = "order_book",
             joinColumns = {
                     @JoinColumn(name = "order_id", nullable = false)},
