@@ -3,7 +3,8 @@
                    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
                    http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
 
-    <include relativeToChangelogFile="true" file="include/2017.11/cumulative.xml"/>
-    <include relativeToChangelogFile="true" file="include/2017.12/cumulative.xml"/>
+    <include relativeToChangelogFile="true" file="201712221821-create_review_table.xml"/>
 
 </databaseChangeLog>
+
+
