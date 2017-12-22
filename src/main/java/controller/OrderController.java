@@ -14,12 +14,10 @@ import service.PersonService;
 @RequestMapping(path="order")
 public class OrderController {
 
-    @Autowired
-    private BookService bookService;
+
     @Autowired
     private OrderService orderService;
-    @Autowired
-    private PersonService personService;
+
 
     @RequestMapping(method = RequestMethod.POST)
     public Order createOrder(@RequestBody OrderDTO orderDTO) {
@@ -29,7 +27,7 @@ public class OrderController {
     @RequestMapping(path = "/{orderId}", method = RequestMethod.PUT)
     public ResponseEntity updateOrder(@PathVariable(name = "orderId", required = true) Integer id,
                              @RequestBody OrderDTO orderDTO){
-        if(!orderService.checkOrderId(id)){
+        if(!orderService.checkOnExist(id)){
         }
 
         Order order = orderDTO.toEntity();

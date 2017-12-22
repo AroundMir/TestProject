@@ -2,6 +2,7 @@ package entity;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.List;
 
 @Entity
 public class Book implements Serializable {
@@ -19,12 +20,16 @@ public class Book implements Serializable {
     public Book() {
     }
 
+    @OneToMany(mappedBy = "book", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Review> reviewList;
+
     public Book(String name, String author, int id, int count) {
         this.name = name;
         this.author = author;
         this.id = id;
         this.count = count;
     }
+
 
     public void setName(String name) {
         this.name = name;
@@ -36,6 +41,10 @@ public class Book implements Serializable {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public void setReviewList(List<Review> reviewList){
+        this.reviewList = reviewList;
     }
 
     public String getName() {
@@ -56,6 +65,10 @@ public class Book implements Serializable {
 
     public void setCount(int count) {
         this.count = count;
+    }
+
+    public List<Review> getAllReviews(){
+        return reviewList;
     }
 
     @Override

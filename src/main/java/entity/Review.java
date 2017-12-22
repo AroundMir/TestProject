@@ -5,7 +5,6 @@ import java.io.Serializable;
 import java.util.List;
 
 @Entity
-@Table(name = "\"review\"")
 public class Review implements Serializable {
 
 	@Id
@@ -14,9 +13,9 @@ public class Review implements Serializable {
 
 	private String name;
 
-	@OneToMany(cascade = {CascadeType.REFRESH, CascadeType.MERGE}, fetch = FetchType.LAZY)
+	@ManyToOne
 	@JoinColumn(name = "book_id")
-	private List<Book> book;
+	private Book book;
 
 	public Review() {
 	}
@@ -37,11 +36,11 @@ public class Review implements Serializable {
 		this.name = name;
 	}
 
-	public List<Book> getBook() {
+	public Book getBook() {
 		return book;
 	}
 
-	public void setBook(List<Book> book) {
+	public void setBook(Book book) {
 		this.book = book;
 	}
 }

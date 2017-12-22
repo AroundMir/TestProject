@@ -27,7 +27,7 @@ public class PersonController {
     @RequestMapping(path = "/{personId}", method = RequestMethod.PUT)
     public ResponseEntity updateBook(@PathVariable(name = "personId", required = true) Integer id,
                                      @RequestBody PersonDTO personDTO) {
-        if (!personService.checkPersonId(id)) {
+        if (!personService.checkOnExist(id)) {
             return ResponseEntity.badRequest().body("id not fount");
         }
         Person person = personDTO.toEntity();

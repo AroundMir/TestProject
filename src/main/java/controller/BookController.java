@@ -14,10 +14,7 @@ public class BookController {
 
 	@Autowired
 	private BookService bookService;
-	@Autowired
-	private OrderService orderService;
-	@Autowired
-	private PersonService personService;
+
 
 	@RequestMapping(method = RequestMethod.POST)
 	public Book createBook(@RequestBody BookDTO bookDTO) {
@@ -27,7 +24,7 @@ public class BookController {
 	@RequestMapping(path = "/{bookId}", method = RequestMethod.PUT)
 	public ResponseEntity updateBook(@PathVariable(name = "bookId", required = true) Integer id,
 									 @RequestBody BookDTO bookDTO) {
-		if (!bookService.checkBookId(id)) {
+		if (!bookService.checkOnExist(id)) {
 			return ResponseEntity.badRequest().body("id not fount");
 		}
 		Book book = bookDTO.toEntity();

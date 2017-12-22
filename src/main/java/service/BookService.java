@@ -1,12 +1,17 @@
 package service;
 
 import DAO.BookDAO;
+import DAO.ReviewDAO;
 import entity.Book;
+import entity.Review;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
 
 import javax.transaction.Transactional;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 
 @Service
@@ -14,9 +19,20 @@ public class BookService {
 
     @Autowired
     private BookDAO bookDAO;
+    @Autowired
+    private ReviewDAO reviewDAO;
 
     @Transactional
     public Book save(Book book) {
+
+        List<Review> reviews = new ArrayList<>();
+        if(!CollectionUtils.isEmpty(book.getAllReviews())){
+            reviews = reviewDAO.findByIds(book.getAllReviews().stream()
+            .map(Review::getId)
+            .collect(Collectors.toList()));
+        }
+        book.setReviewList(reviews);
+
         return bookDAO.save(book);
     }
 
@@ -34,7 +50,8 @@ public class BookService {
         return bookDAO.findAll();
         }
 
-    public boolean checkBookId(Integer id) {
+    public boolean checkOnExist(Integer id) {
         return bookDAO.exists(id);
     }
+
 }

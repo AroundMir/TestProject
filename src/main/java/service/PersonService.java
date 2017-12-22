@@ -15,11 +15,6 @@ public class PersonService {
     @Autowired
     private PersonDAO personDAO;
 
-    public List<Person> person() {
-        List<Person> persons = personDAO.findAll();
-        return persons;
-    }
-
     @Transactional
     public Person save(Person person) {
         return personDAO.save(person);
@@ -38,7 +33,7 @@ public class PersonService {
         return personDAO.findAll();
     }
 
-    public boolean checkPersonId(Integer id) {
+    public boolean checkOnExist(Integer id) {
         return personDAO.exists(id);
     }
 

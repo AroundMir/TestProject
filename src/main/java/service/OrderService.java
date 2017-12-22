@@ -52,7 +52,7 @@ public class OrderService {
 		return orderDAO.findAll();
 	}
 
-	public boolean checkOrderId(Integer id) {
+	public boolean checkOnExist(Integer id) {
 		return orderDAO.exists(id);
 	}
 }
