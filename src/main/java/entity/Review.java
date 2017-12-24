@@ -14,8 +14,8 @@ public class Review implements Serializable {
 
 	private String name;
 
-    @ManyToOne
-    @JoinColumn(name = "book_id")
+
+	@Column(name = "book_id")
 	private Book book;
 
 	public Review() {
@@ -25,7 +25,7 @@ public class Review implements Serializable {
 		return this.id;
 	}
 
-	public void setId(Integer id) {
+	public void setId(Integer id){
 		this.id = id;
 	}
 
@@ -37,6 +37,7 @@ public class Review implements Serializable {
 		this.name = name;
 	}
 
+	@ManyToOne
 	public Book getBook() {
 		return this.book;
 	}

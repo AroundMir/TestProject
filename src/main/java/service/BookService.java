@@ -25,24 +25,15 @@ public class BookService {
     @Transactional
     public Book save(Book book) {
 
+/*
         List<Review> reviews = new ArrayList<>();
         if(!CollectionUtils.isEmpty(reviewDAO.findAll())){
             reviews = reviewDAO.findAll().stream().
                     filter(s -> s.getBookId()  == book.getId()).
                     collect(Collectors.toList());
+*/
 
-            for(Review r : reviews){
-               book.addReview(r);
-            }
-        }
-try {
     return bookDAO.save(book);
-} catch (Throwable ex){
-
-            ex.getMessage();
-}
-
-return null;
     }
 
     //удаление по ИД
@@ -51,29 +42,10 @@ return null;
         bookDAO.delete(id);
     }
 
-    public Book findById(Integer id){
-
+    public Book findById(Integer id) {
         Book book = bookDAO.findOne(id);
-
-        List<Review> reviews = new ArrayList<>();
-        if(!CollectionUtils.isEmpty(reviewDAO.findAll())) {
-            reviews = reviewDAO.findAll().stream().
-                    filter(s -> s.getBookId() == book.getId()).
-                    collect(Collectors.toList());
-
-            for (Review r : reviews) {
-                book.addReview(r);
-            }
-        }
-
-        try{
-            return book;
-        } catch (Throwable ex){
-            ex.getMessage();
-        }
-
-return null;
-        }
+        return book;
+    }
 
     public List<Book> showAll() {
         return bookDAO.findAll();

@@ -20,7 +20,8 @@ public class Book implements Serializable {
     public Book() {
     }
 
-    @OneToMany(mappedBy = "book", cascade = {CascadeType.ALL})
+
+    @OneToMany(mappedBy = "book")
     private List<Review> reviews;
 
     public Book(String name, String author, int id, int count) {
@@ -42,17 +43,17 @@ public class Book implements Serializable {
         this.id = id;
     }
 
-    public void addReview(Review review){
-        review.setBook(this);
-        this.reviews.add(review);
+
+    public List<Review> getReviews(){
+        return this.reviews;
     }
 
     public String getName() {
-        return this.name;
+        return name;
     }
 
     public String getAuthor() {
-        return  this.author;
+        return  author;
     }
 
     public int getId() {
@@ -60,15 +61,11 @@ public class Book implements Serializable {
     }
 
     public int getCount() {
-        return this.count;
+        return count;
     }
 
     public void setCount(int count) {
         this.count = count;
-    }
-
-    public List<Review> getAllReviews(){
-       return this.getAllReviews();
     }
 
     @Override
