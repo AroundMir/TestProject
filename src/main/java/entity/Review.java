@@ -5,6 +5,7 @@ import java.io.Serializable;
 import java.util.List;
 
 @Entity
+@Table(name = "review")
 public class Review implements Serializable {
 
 	@Id
@@ -13,15 +14,15 @@ public class Review implements Serializable {
 
 	private String name;
 
-	@ManyToOne
-	@JoinColumn(name = "book_id")
+    @ManyToOne
+    @JoinColumn(name = "book_id")
 	private Book book;
 
 	public Review() {
 	}
 
 	public Integer getId() {
-		return id;
+		return this.id;
 	}
 
 	public void setId(Integer id) {
@@ -29,7 +30,7 @@ public class Review implements Serializable {
 	}
 
 	public String getName() {
-		return name;
+		return this.name;
 	}
 
 	public void setName(String name) {
@@ -37,8 +38,12 @@ public class Review implements Serializable {
 	}
 
 	public Book getBook() {
-		return book;
+		return this.book;
 	}
+
+	public Integer getBookId() {
+	    return this.book.getId();
+    }
 
 	public void setBook(Book book) {
 		this.book = book;

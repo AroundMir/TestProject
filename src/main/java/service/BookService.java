@@ -26,14 +26,23 @@ public class BookService {
     public Book save(Book book) {
 
         List<Review> reviews = new ArrayList<>();
-        if(!CollectionUtils.isEmpty(book.getAllReviews())){
-            reviews = reviewDAO.findByIds(book.getAllReviews().stream()
-            .map(Review::getId)
-            .collect(Collectors.toList()));
-        }
-        book.setReviewList(reviews);
+        if(!CollectionUtils.isEmpty(reviewDAO.findAll())){
+            reviews = reviewDAO.findAll().stream().
+                    filter(s -> s.getBookId()  == book.getId()).
+                    collect(Collectors.toList());
 
-        return bookDAO.save(book);
+            for(Review r : reviews){
+               book.addReview(r);
+            }
+        }
+try {
+    return bookDAO.save(book);
+} catch (Throwable ex){
+
+            ex.getMessage();
+}
+
+return null;
     }
 
     //удаление по ИД
@@ -43,8 +52,28 @@ public class BookService {
     }
 
     public Book findById(Integer id){
-        return bookDAO.findOne(id);
-    }
+
+        Book book = bookDAO.findOne(id);
+
+        List<Review> reviews = new ArrayList<>();
+        if(!CollectionUtils.isEmpty(reviewDAO.findAll())) {
+            reviews = reviewDAO.findAll().stream().
+                    filter(s -> s.getBookId() == book.getId()).
+                    collect(Collectors.toList());
+
+            for (Review r : reviews) {
+                book.addReview(r);
+            }
+        }
+
+        try{
+            return book;
+        } catch (Throwable ex){
+            ex.getMessage();
+        }
+
+return null;
+        }
 
     public List<Book> showAll() {
         return bookDAO.findAll();

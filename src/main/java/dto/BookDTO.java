@@ -1,6 +1,9 @@
 package dto;
 
 import entity.Book;
+import entity.Review;
+
+import java.util.List;
 
 /**
  * Created by Vladimir on 28.11.2017.
@@ -12,6 +15,8 @@ public class BookDTO {
 	private String author;
 
 	private int count;
+
+	private List<Review> reviewList;
 
 	public BookDTO() {
 	}
@@ -38,6 +43,10 @@ public class BookDTO {
 
 	public void setCount(int count) {
 		this.count = count;
+	}
+
+	public List<Review> getAllReviews(){
+		return reviewList;
 	}
 
 	public Book toEntity() {
