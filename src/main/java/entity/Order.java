@@ -11,7 +11,7 @@ public class Order implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Integer id;
 
     @OneToOne(cascade = {CascadeType.REFRESH, CascadeType.MERGE}, fetch = FetchType.EAGER)
     @JoinColumn(name = "person_id")
@@ -45,7 +45,6 @@ public class Order implements Serializable {
     }
 
     public Person getPerson() {
-
         return this.person;
     }
 

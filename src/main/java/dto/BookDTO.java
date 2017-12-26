@@ -2,6 +2,7 @@ package dto;
 
 import entity.Book;
 import entity.Review;
+import io.swagger.models.auth.In;
 
 import java.util.List;
 
@@ -16,7 +17,9 @@ public class BookDTO {
 
 	private int count;
 
-	private List<Review> reviewList;
+	private Integer id;
+
+	private List<Integer> reviewsID;
 
 	public BookDTO() {
 	}
@@ -33,6 +36,21 @@ public class BookDTO {
 		return author;
 	}
 
+	public void setId(Integer id){
+		this.id = id;
+	}
+
+	public Integer getId() {
+		return id;
+	}
+
+	public void addReviewsID(List<Integer> reviewsID) {
+
+		for(Integer num : reviewsID){
+			this.reviewsID.add(num);
+		}
+	}
+
 	public void setAuthor(String author) {
 		this.author = author;
 	}
@@ -45,9 +63,7 @@ public class BookDTO {
 		this.count = count;
 	}
 
-	public List<Review> getAllReviews(){
-		return reviewList;
-	}
+
 
 	public Book toEntity() {
 		Book book = new Book();

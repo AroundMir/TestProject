@@ -33,6 +33,7 @@ public class BookService {
                     collect(Collectors.toList());
 */
 
+
     return bookDAO.save(book);
     }
 
@@ -43,7 +44,16 @@ public class BookService {
     }
 
     public Book findById(Integer id) {
-        Book book = bookDAO.findOne(id);
+
+        Book book;
+        book = bookDAO.findById(id);
+
+        List<Integer> reviewsID = new ArrayList<>();
+
+        reviewsID.add(reviewDAO.findByIds(id).getId());
+
+        book.addReviewsID(reviewsID);
+
         return book;
     }
 

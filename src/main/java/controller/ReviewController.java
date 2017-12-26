@@ -22,7 +22,6 @@ public class ReviewController {
     @Autowired
     ReviewService reviewService;
 
-
     @RequestMapping(method = RequestMethod.POST)
     public Review create(@RequestBody ReviewDTO reviewDTO){
        return reviewService.save(reviewDTO.toEntity());
@@ -54,7 +53,4 @@ public class ReviewController {
          public Review get(@PathVariable(name = "reviewId", required =  true) Integer id){
             return reviewService.find(id);
         }
-
-
-
 }

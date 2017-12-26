@@ -9,6 +9,8 @@ import java.util.List;
 
 public class OrderDTO {
 
+        private Integer id;
+
         private Person person;
 
         private List<Book> books;
@@ -30,7 +32,15 @@ public class OrderDTO {
             return this.person;
         }
 
-        public void setPerson(Person person) {
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public void setPerson(Person person) {
             this.person = person;
         }
 
