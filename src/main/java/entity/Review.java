@@ -12,10 +12,8 @@ public class Review implements Serializable {
 	private Integer id;
 
 	private String name;
-
-	@ManyToOne(optional = true, targetEntity = Book.class)
-	@JoinColumn(name = "book_id")
-	private Integer book_id;
+	
+	private Book book;
 
 	public Review() {
 	}
@@ -37,11 +35,15 @@ public class Review implements Serializable {
 	}
 
 
-	public Integer getBook_id() {
-	    return this.book_id;
+	public Book getBook() {
+		return this.book;
+	}
+
+	public Integer getBookId() {
+	    return this.book.getId();
     }
 
-	public void setBook_id(Integer id) {
-		this.book_id = id;
+	public void setBook(Book book) {
+		this.book = book;
 	}
 }

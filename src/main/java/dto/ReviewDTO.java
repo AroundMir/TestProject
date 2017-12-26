@@ -12,7 +12,7 @@ public class ReviewDTO {
 
     private String name;
 
-    private Integer book_id;
+    private Book book;
 
     public ReviewDTO() {
     }
@@ -33,18 +33,18 @@ public class ReviewDTO {
         this.name = name;
     }
 
-    public Integer getBook_id() {
-        return this.book_id;
+    public Book getBook() {
+        return book;
     }
 
-    public void setBook_id(Integer id) {
-        this.book_id = id;
+    public void setBook(Book book) {
+        this.book = book;
     }
 
     public Review toEntity(){
         Review review = new Review();
         review.setName(this.name);
-        review.setBook_id(this.id);
+        review.setBook(this.book);
         return  review;
     }
 

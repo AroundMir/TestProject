@@ -14,25 +14,22 @@ public class Book implements Serializable {
     private String name;
     private String author;
 
+    @Column(name = "count")
     private int count;
-
-
-    private List<Integer> reviewsID;
 
     public Book() {
     }
+
+
+
+    @OneToMany(mappedBy = "book")
+    private List<Review> reviews;
 
     public Book(String name, String author, int id, int count) {
         this.name = name;
         this.author = author;
         this.id = id;
         this.count = count;
-    }
-
-    public void addReviewsID(List<Integer> reviewsID) {
-        for(Integer num : reviewsID){
-            this.reviewsID.add(num);
-        }
     }
 
     public void setName(String name) {
@@ -47,9 +44,13 @@ public class Book implements Serializable {
         this.id = id;
     }
 
-   /* public Review getReviews(){
-        return this.review;
-    }*/
+    public void setReviews(List<Review> reviews) {
+        this.reviews = reviews;
+    }
+
+    public List<Review> getReviews(){
+        return this.reviews;
+    }
 
     public String getName() {
         return name;
@@ -65,10 +66,6 @@ public class Book implements Serializable {
 
     public int getCount() {
         return count;
-    }
-
-    public List<Integer> getReviewsID() {
-        return reviewsID;
     }
 
     public void setCount(int count) {

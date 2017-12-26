@@ -2,7 +2,6 @@ package service;
 
 import DAO.ReviewDAO;
 
-import com.sun.org.apache.regexp.internal.RE;
 import entity.Review;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -27,9 +26,13 @@ public class ReviewService {
         reviewDAO.delete(id);
     }
 
-
     public Review find(Integer id){
-        return reviewDAO.findOne(id);
+
+        Review review;
+
+        review = reviewDAO.findById(id);
+
+        return review;
     }
 
     public List<Review> findSeveral(List<Integer> integers){

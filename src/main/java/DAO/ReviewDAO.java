@@ -14,7 +14,7 @@ public interface ReviewDAO extends JpaRepository<Review, Integer> {
     @Query(nativeQuery = true, value = "SELECT * FROM review WHERE id IN (:ids)")
     List<Review> findByIds(@NotNull @Param("ids") List<Integer> ids);
 
-    @Query(nativeQuery = true, value = "SELECT * FROM review WHERE id IN (:id)")
+    @Query(nativeQuery = true, value = "SELECT * FROM review WHERE id = (:id)")
     Review findById(@NotNull @Param("id") Integer id);
 
 
