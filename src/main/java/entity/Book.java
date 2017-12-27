@@ -5,6 +5,7 @@ import java.io.Serializable;
 import java.util.List;
 
 @Entity
+@Table(name = "book")
 public class Book implements Serializable {
 
     @Id
@@ -22,7 +23,7 @@ public class Book implements Serializable {
 
 
 
-    @OneToMany(mappedBy = "book")
+    @OneToMany(mappedBy = "book", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Review> reviews;
 
     public Book(String name, String author, int id, int count) {

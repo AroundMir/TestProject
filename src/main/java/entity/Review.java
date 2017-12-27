@@ -5,6 +5,7 @@ import java.io.Serializable;
 import java.util.List;
 
 @Entity
+@Table(name = "review")
 public class Review implements Serializable {
 
 	@Id
@@ -12,7 +13,10 @@ public class Review implements Serializable {
 	private Integer id;
 
 	private String name;
-	
+
+
+	@ManyToOne
+	@JoinColumn(name = "book_id", referencedColumnName = "id")
 	private Book book;
 
 	public Review() {
