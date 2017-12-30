@@ -2,7 +2,6 @@ package entity;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.List;
 
 @Entity
 @Table(name = "review")
@@ -26,7 +25,7 @@ public class Review implements Serializable {
 		return this.id;
 	}
 
-	public void setId(Integer id){
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
@@ -44,8 +43,8 @@ public class Review implements Serializable {
 	}
 
 	public Integer getBookId() {
-	    return this.book.getId();
-    }
+		return this.book.getId();
+	}
 
 	public void setBook(Book book) {
 		this.book = book;

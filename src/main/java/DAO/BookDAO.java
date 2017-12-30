@@ -10,9 +10,10 @@ import java.util.List;
 
 public interface BookDAO extends JpaRepository<Book, Integer> {
 
-    @Query(nativeQuery = true, value = "SELECT * FROM book")
-    List<Book> test2();
+	@Query(nativeQuery = true, value = "SELECT * FROM book")
+	List<Book> test2();
 
-    @Query(nativeQuery = true, value = "SELECT * FROM book WHERE id IN (:ids)")
-    List<Book> findByIds(@NotNull @Param("ids") List<Integer> ids);
+	//Находит все кники, по условию (id присутствует в переданном списке)
+	@Query(nativeQuery = true, value = "SELECT * FROM book WHERE id IN (:ids)")
+	List<Book> findByIds(@NotNull @Param("ids") List<Integer> ids);
 }

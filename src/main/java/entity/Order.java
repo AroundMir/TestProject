@@ -1,11 +1,17 @@
 package entity;
 
 
+import lombok.*;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.List;
 
 @Entity
+@Data
+@EqualsAndHashCode
+@ToString
+@NoArgsConstructor
 @Table(name = "\"order\"")
 public class Order implements Serializable {
 
@@ -24,32 +30,4 @@ public class Order implements Serializable {
             inverseJoinColumns = {
                     @JoinColumn(name = "book_id", nullable = false)})
     private List<Book> books;
-
-    public Order(){
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public List<Book> getBooks() {
-        return books;
-    }
-
-    public void setBooks(List<Book> books) {
-        this.books = books;
-    }
-
-    public Person getPerson() {
-
-        return this.person;
-    }
-
-    public void setPerson(Person person) {
-        this.person = person;
-    }
 }
