@@ -8,10 +8,10 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @Configuration
-@PropertySource("classpath:data.application.properties")
 @EntityScan("entity")
 @EnableJpaRepositories("DAO")
 @EnableTransactionManagement
+@PropertySource("classpath:data.application.properties")
 @EnableJpaAuditing
 public class DataConfig {
 }

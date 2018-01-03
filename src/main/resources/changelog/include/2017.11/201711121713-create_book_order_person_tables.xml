@@ -31,7 +31,9 @@
             <constraints primaryKey="true" primaryKeyName="pk_order_id"/>
         </column>
         <column name="person_id" type="bigint">
-            <constraints nullable="false" foreignKeyName="fk_order_person_id" references="person(id)"/>
+            <constraints nullable="false" foreignKeyName="fk_order_person_id"
+                         referencedTableName="person"
+                         referencedColumnNames="id"/>
         </column>
     </createTable>
 

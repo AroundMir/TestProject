@@ -1,14 +1,8 @@
 package entity;
 
-import lombok.*;
-
 import javax.persistence.*;
 
 @Entity
-@Data
-@EqualsAndHashCode
-@ToString
-@NoArgsConstructor
 @Table(name = "person")
 public class Person {
 
@@ -18,4 +12,31 @@ public class Person {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
+
+	public Person() {
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getSurname() {
+		return surname;
+	}
+
+	public void setSurname(String surname) {
+		this.surname = surname;
+	}
+
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
 }

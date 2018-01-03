@@ -11,13 +11,13 @@ import org.springframework.context.annotation.Import;
 @Import({ControllerConfig.class, DataConfig.class, ServiceConfig.class, SwaggerConfig.class})
 public class SpringBootRun extends SpringBootServletInitializer {
 
-    public static void main(final String[] args) {
-        SpringApplication.run(SpringBootRun.class, args);
-    }
+	public static void main(final String[] args) {
+		SpringApplication.run(SpringBootRun.class, args);
+	}
 
-    @Override
-    protected SpringApplicationBuilder configure(final SpringApplicationBuilder builder) {
-        return builder.sources(SpringBootRun.class);
-    }
+	@Override
+	protected SpringApplicationBuilder configure(final SpringApplicationBuilder builder) {
+		return builder.sources(SpringBootRun.class);
+	}
 }
 

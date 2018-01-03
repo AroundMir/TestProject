@@ -10,10 +10,14 @@
 
         <createTable tableName="order_book" remarks="связь заказа и книги">
             <column name="order_id" type="bigint">
-                <constraints nullable="false" foreignKeyName="fk_order_book_id" references="order(id)"/>
+                <constraints nullable="false" foreignKeyName="fk_order_book_id"
+                             referencedTableName="order"
+                             referencedColumnNames="id"/>
             </column>
             <column name="book_id" type="bigint">
-                <constraints nullable="false" foreignKeyName="fk_book_order_id" references="book(id)"/>
+                <constraints nullable="false" foreignKeyName="fk_book_order_id"
+                             referencedTableName="book"
+                             referencedColumnNames="id"/>
             </column>
         </createTable>
 
