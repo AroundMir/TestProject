@@ -1,9 +1,17 @@
 package entity;
 
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
+
 import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
+@Data
+@EqualsAndHashCode
+@NoArgsConstructor
 @Table(name = "review")
 public class Review implements Serializable {
 
@@ -13,40 +21,8 @@ public class Review implements Serializable {
 
 	private String name;
 
-
-	@ManyToOne
+	@ManyToOne(cascade ={CascadeType.MERGE, CascadeType.PERSIST})
 	@JoinColumn(name = "book_id", referencedColumnName = "id")
 	private Book book;
 
-	public Review() {
-	}
-
-	public Integer getId() {
-		return this.id;
-	}
-
-	public void setId(Integer id) {
-		this.id = id;
-	}
-
-	public String getName() {
-		return this.name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-
-	public Book getBook() {
-		return this.book;
-	}
-
-	public Integer getBookId() {
-		return this.book.getId();
-	}
-
-	public void setBook(Book book) {
-		this.book = book;
-	}
 }

@@ -25,15 +25,6 @@ public class BookService {
 
     @Transactional
     public Book save(Book book) {
-        List<Review> reviews = new ArrayList<>();
-        if(!CollectionUtils.isEmpty(book.getReviews())){
-            reviews = reviewDAO.findByIds(book.getReviews().stream()
-            .map(Review::getId)
-            .collect(Collectors.toList()));
-        }
-
-        book.setReviews(reviews);
-
         return bookDAO.save(book);
     }
 
@@ -44,8 +35,6 @@ public class BookService {
     }
 
     public Book findById(Integer id){
-
-
         return bookDAO.findOne(id);
     }
 

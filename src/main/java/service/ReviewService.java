@@ -27,16 +27,10 @@ public class ReviewService {
     }
 
     public Review find(Integer id){
-
-        Review review;
-
-        review = reviewDAO.findById(id);
-
-        return review;
+         return reviewDAO.findById(id);
     }
 
     public List<Review> findSeveral(List<Integer> integers){
-
          List<Review> reviews = reviewDAO.findByIds(integers);
          return reviews;
     }
