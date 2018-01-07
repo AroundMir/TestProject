@@ -1,8 +1,11 @@
 package entity;
 
+import lombok.EqualsAndHashCode;
+
 import javax.persistence.*;
 
 @Entity
+@EqualsAndHashCode
 @Table(name = "person")
 public class Person {
 

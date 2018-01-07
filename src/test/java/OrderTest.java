@@ -33,7 +33,6 @@ public class OrderTest extends BaseIntegrationTest {
     PersonDAO personDAO;
 
     HashMap<Integer, Order> orderMap = new HashMap<>();
-
     HashMap<Integer, Person> personMap = new HashMap<>();
 
     @Before
@@ -49,19 +48,15 @@ public class OrderTest extends BaseIntegrationTest {
 
             Order testOrder = new Order();
             testOrder.setPerson(person);
-            testOrder.setId(i);
 
             orderMap.put(i, testOrder);
             orderDAO.save(testOrder);
-
         });
     }
 
     @Test
     public void checkDataBase(){
-
         List<Order> orders = orderDAO.findAll().stream().collect(Collectors.toList());
-
         orders.stream().forEach(s -> System.out.println(s.getPerson()));
     }
 
@@ -97,7 +92,7 @@ public class OrderTest extends BaseIntegrationTest {
 
         OrderDTO orderDTO = new OrderDTO();
         orderDTO.setPerson(personMap.get(1));
-        orderDTO.setId(2);
+        orderDTO.setId(orderMap.get(2).getId());
 
         MvcResult mvcResult = mockMvc
                 .perform(
@@ -150,7 +145,6 @@ public class OrderTest extends BaseIntegrationTest {
         assertNotNull(order.getId());
 
         assertEquals(order.getId(), orderMap.get(1).getId());
-        assertEquals(order.getPerson(), orderMap.get(1).getPerson());
 
     }
 }

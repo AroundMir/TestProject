@@ -1,6 +1,5 @@
 import DAO.BookDAO;
 import DAO.ReviewDAO;
-import com.sun.org.apache.regexp.internal.RE;
 import dto.BookDTO;
 import entity.Book;
 import entity.Review;
@@ -10,12 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
-import org.springframework.test.web.servlet.RequestBuilder;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
-import sun.swing.BakedArrayList;
 
 import javax.transaction.Transactional;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -36,18 +32,14 @@ public class BookTest extends BaseIntegrationTest {
 
     HashMap<Integer, Book> bookMap = new HashMap<>();
 
-    HashMap<Integer, Review> reviewMap = new HashMap<>();
-
     @Before
     public void setTestDate(){
         IntStream.rangeClosed(1,3).forEach(i -> {
 
             Book testBook = new Book();
-
             testBook.setName("book name");
             testBook.setCount(3);
             testBook.setAuthor("book Author");
-
             bookMap.put(i, testBook);
             bookDAO.save(testBook);
 
@@ -116,7 +108,7 @@ public class BookTest extends BaseIntegrationTest {
         assertNotNull(book);
         assertNotNull(book.getId());
 
-        assertEquals(book.getId(), reviewMap.get(1).getId());
+        assertEquals(book.getId(), bookMap.get(1).getId());
     }
 
     @Test
