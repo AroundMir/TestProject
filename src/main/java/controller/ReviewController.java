@@ -24,12 +24,12 @@ public class ReviewController {
 
 
     @RequestMapping(method = RequestMethod.POST)
-    public Review create(@RequestBody ReviewDTO reviewDTO){
-       return reviewService.save(reviewDTO.toEntity());
+    public ResponseEntity<Review> create(@RequestBody ReviewDTO reviewDTO){
+       return ResponseEntity.ok(reviewService.save(reviewDTO.toEntity()));
     }
 
     @RequestMapping(path = "/{reviewId}", method = RequestMethod.PUT)
-    public ResponseEntity update(@PathVariable(name = "reviewId", required = true) Integer id,
+    public ResponseEntity<Review> update(@PathVariable(name = "reviewId", required = true) Integer id,
                                  @RequestBody ReviewDTO reviewDTO){
         if(!reviewService.checkOnExist(id)){
             ResponseEntity.badRequest().body("id not found");
@@ -51,8 +51,8 @@ public class ReviewController {
     }
 
         @RequestMapping(path = "/{reviewId}",  method = RequestMethod.GET)
-         public Review get(@PathVariable(name = "reviewId", required =  true) Integer id){
-            return reviewService.find(id);
+         public ResponseEntity<Review> get(@PathVariable(name = "reviewId", required =  true) Integer id){
+            return  ResponseEntity.ok(reviewService.find(id));
         }
 
 

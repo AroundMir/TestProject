@@ -14,7 +14,7 @@ public class Order implements Serializable {
     private Integer id;
 
     @OneToOne(cascade = {CascadeType.REFRESH, CascadeType.MERGE}, fetch = FetchType.EAGER)
-    @JoinColumn(name = "person_id")
+    @JoinColumn(name = "person_id", referencedColumnName = "id")
     private Person person;
 
     @ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.ALL}, targetEntity = Book.class)

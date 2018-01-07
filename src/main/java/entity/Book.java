@@ -18,7 +18,7 @@ public class Book implements Serializable {
     @Column(name = "count")
     private int count;
 
-    @OneToMany(mappedBy = "book", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "book", cascade = CascadeType.MERGE)
     private List<Review> reviews;
 
     public Book() {

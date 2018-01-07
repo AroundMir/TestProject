@@ -21,7 +21,9 @@ public class BookDTO {
 
 	private String author;
 
-	private int count;
+	private Integer count;
+
+	private Integer id;
 
 	private List<Review> reviews;
 

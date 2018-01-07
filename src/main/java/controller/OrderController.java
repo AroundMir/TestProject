@@ -16,16 +16,16 @@ public class OrderController {
 	@Autowired
 	private OrderService orderService;
 
-
 	@RequestMapping(method = RequestMethod.POST)
-	public Order createOrder(@RequestBody OrderDTO orderDTO) {
-		return orderService.save(orderDTO.toEntity());
+	public ResponseEntity<Order> createOrder(@RequestBody OrderDTO orderDTO) {
+		return ResponseEntity.ok(orderService.save(orderDTO.toEntity()));
 	}
 
 	@RequestMapping(path = "/{orderId}", method = RequestMethod.PUT)
 	public ResponseEntity updateOrder(@PathVariable(name = "orderId", required = true) Integer id,
 									  @RequestBody OrderDTO orderDTO) {
 		if (!orderService.checkOnExist(id)) {
+			return ResponseEntity.badRequest().build();
 		}
 
 		Order order = orderDTO.toEntity();
@@ -34,8 +34,8 @@ public class OrderController {
 	}
 
 	@RequestMapping(path = "/{orderId}", method = RequestMethod.GET)
-	public Order getById(@PathVariable(name = "orderId", required = true) Integer id) {
-		return orderService.getById(id);
+	public ResponseEntity<Order> getById(@PathVariable(name = "orderId", required = true) Integer id) {
+		return ResponseEntity.ok(orderService.getById(id));
 	}
 
 	@RequestMapping(path = "/{orderId}", method = RequestMethod.DELETE)

@@ -17,6 +17,4 @@ public interface ReviewDAO extends JpaRepository<Review, Integer> {
     @Query(nativeQuery = true, value = "SELECT * FROM review WHERE id = (:id)")
     Review findById(@NotNull @Param("id") Integer id);
 
-
-
 }

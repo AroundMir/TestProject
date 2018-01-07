@@ -13,12 +13,13 @@ public class PersonDTO {
     private String name;
     private String surname;
 
-    private int id;
+    private Integer id;
 
     public Person toEntity() {
         Person person = new Person();
         person.setName(this.name);
         person.setSurname(this.surname);
+        person.setId(this.id != null ? this.id : null);
         return person;
     }
 }

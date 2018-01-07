@@ -19,11 +19,14 @@ public class OrderDTO {
 
         private List<Book> books;
 
+        private Integer id;
+
         public Order toEntity() {
 
             Order order = new Order();
             order.setPerson(this.person);
             order.setBooks(this.books);
+            order.setId(this.id != null ? this.id : null);
             return order;
         }
     }

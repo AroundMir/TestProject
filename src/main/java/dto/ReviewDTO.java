@@ -8,8 +8,6 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 
 
-
-
 @Data
 @EqualsAndHashCode
 @NoArgsConstructor

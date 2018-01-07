@@ -34,8 +34,8 @@ public class BookService {
         bookDAO.delete(id);
     }
 
-    public Book findById(Integer id){
-        return bookDAO.findOne(id);
+    public Book find(Integer id){
+        return bookDAO.findById(id);
     }
 
     public List<Book> showAll() {
