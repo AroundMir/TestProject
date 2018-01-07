@@ -8,5 +8,5 @@ build
 logs
 .idea
 out
-
-gradle/wrapper/gradle-wrapper.properties
+gradlew
+gradle/**
